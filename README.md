@@ -2,10 +2,11 @@
 网易云ncm音乐格式转换为mp3音乐格式工具
 
 ## 项目组成
-项目分为三个版本
+项目分为两个版本
 - NCM2MP3(Maven):该版本为IDEA中的Maven项目,需要得到Maven的支持,同时使用了Lombok包,需要下载Lombok;
 - NCM2MP3:该版本为普通的Java项目,只需要配置jar包(lib目录下),便可以运行.
 - NCM2MP3.jar:该版本为NCM2MP3的打包项目,所有环境均已经配置完成,只需要电脑上含有JDK环境,在命令行中便可以运行
+- 密码学.md:关于密码学相关知识不懂的可以查看该文档
 
 ## 运行说明
 - NCM2MP3.jar:命令行中在该jar包的目录下执行java -jar NCM2MP3.jar
@@ -28,3 +29,20 @@
 |         Image          |          Image Size           | 图片数据                                                     |
 |       Music Data       |               -               | CR4-KSA生成s盒,CR4-PRGA解密                                  |
 
+## 项目说明
+- control:控制管理
+  - ControlThread.java 对应每一个音乐转换的任务(消费者)
+  - ThreadPool.java 线程池(生产者消费者模型,默认的线程池大小为5)
+- core:音乐格式转换核心功能实现
+  - Combine.java 将分析的各个数据整合到一起
+  - Core.java 将NCM音乐解密拆分(==如果想快速看懂这个项目:建议从这个类开始看==)
+- mime 封装的数据类型
+  - MATA.java 音乐头部信息
+  - NCM.java 音乐输入输出信息等基本信息
+- utils 工具类
+  - AES.java AES解密的实现(ECB加密模式,PKCS5Padding填充模式)
+  - CR4.java CR4解密的实现(这算法本质就是打乱顺序,需要注意的byte是1个字节且无符号的,以及对其取整操作(&0xff))
+  - Utils.java 杂七杂八的工具(有注释说明)
+- View 视图
+  - view.java 用的Swing做的视图(Flatlaf这个jar包中有皮肤,所以看起来还不错.以后有机会学学javaFX..)
+-main.java 
