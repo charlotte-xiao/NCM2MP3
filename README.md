@@ -1,16 +1,14 @@
-# NCM2MP3-By-JAVA
+# NCM2MP3
 网易云ncm音乐格式转换为mp3音乐格式工具
 
-## 项目组成
-项目分为两个版本
-- NCM2MP3(Maven):该版本为IDEA中的Maven项目,需要得到Maven的支持,同时使用了Lombok包,需要下载Lombok;
-- NCM2MP3:该版本为普通的Java项目,只需要配置jar包(lib目录下),便可以运行.
-- NCM2MP3.jar:该版本为NCM2MP3的打包项目,所有环境均已经配置完成,只需要电脑上含有JDK环境,在命令行中便可以运行
-- 密码学.md:关于密码学相关知识不懂的可以查看该文档
+## 环境准备
+- JDK8.0以上
+- 依赖构建工具 Maven
+- 集成开发环境 IDEA(插件支持:Lombok)
 
 ## 运行说明
-- NCM2MP3.jar:命令行中在该jar包的目录下执行java -jar NCM2MP3.jar
-- 其他两个若要运行,在环境配置好后,执行入口为main.java
+- 使用NCM2MP3.jar运行(只需要准备jdk环境便可以):命令行中在该jar包的目录下执行java -jar NCM2MP3.jar
+- 用源代码运行:在环境配置好后,执行入口为main.java
 
 ## 原理说明
   NCM格式是网易云音乐特有的音乐格式,这种音乐格式用到AES,CR4的加密算法对普通的音乐格式(如MP3,FLAC)进行加密,若要了解该加密过程,最好的方法就是知道起格式图,以及加密的原理(可以参考笔记`密码学.md`).
@@ -29,7 +27,7 @@
 |         Image          |          Image Size           | 图片数据                                                     |
 |       Music Data       |               -               | CR4-KSA生成s盒,CR4-PRGA解密                                  |
 
-## 项目说明
+## 项目构成说明
 - control:控制管理
   - ControlThread.java 对应每一个音乐转换的任务(消费者)
   - ThreadPool.java 线程池(生产者消费者模型,默认的线程池大小为5)
@@ -46,3 +44,6 @@
 - View 视图
   - view.java 用的Swing做的视图(Flatlaf这个jar包中有皮肤,所以看起来还不错.以后有机会学学javaFX..)
 -main.java 
+
+## 更多
+- 密码学.md:关于密码学相关知识不懂的可以查看该文档

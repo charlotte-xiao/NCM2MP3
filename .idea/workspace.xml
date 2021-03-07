@@ -23,39 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7bf80fc-aaa2-4306-aeb9-4d2158ee269c" name="Default Changelist" comment="update the structure of project">
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/control/ControlThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/control/ControlThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/control/ThreadPool.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/core/Combine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/core/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/mime/MATA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mime/MATA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/mime/NCM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mime/NCM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/utils/AES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/AES.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/utils/CR4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/CR4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/java/view/View.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/View.jfd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3(Maven)/src/main/resources/image/ico.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/ico.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/NCM2MP3.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/lib/fastjson-1.2.75.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/lib/flatlaf-0.45.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/lib/jaudiotagger-2.2.6.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/resources/image/ico.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/control/ControlThread.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/control/ThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/control/ThreadPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/core/Combine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Combine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/core/Core.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/mime/MATA.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/mime/NCM.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/utils/AES.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/utils/CR4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/utils/Utils.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
-    <list id="9966485d-dfd5-4b0c-82c1-e556a892b2d6" name="Revert &quot;update the structure of project&quot;" comment="Revert &quot;update the structure of project&quot;&#10;&#10;This reverts commit a23dd210">
-      <change beforePath="$PROJECT_DIR$/NCM2MP3/src/view/View.java" beforeDir="false" />
-    </list>
+    <list id="9966485d-dfd5-4b0c-82c1-e556a892b2d6" name="Revert &quot;update the structure of project&quot;" comment="Revert &quot;update the structure of project&quot;&#10;&#10;This reverts commit a23dd210" />
     <list id="97098077-7420-4d47-9d15-dd9d5b3d80ea" name="update the structure of project" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +76,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="GitIgnore" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
@@ -114,6 +86,31 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\program_files\GitWorkSpace\NCM2MP3-By-JAVA" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main" />
+      <module name="NCM2MP3-By-JAVA" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -125,6 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1615011242490</updated>
       <workItem from="1615011245623" duration="2518000" />
+      <workItem from="1615085995403" duration="583000" />
     </task>
     <task id="LOCAL-00001" summary="update the structure of project">
       <created>1615012040365</created>
@@ -156,6 +154,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Revert &quot;update the structure of project&quot;&#10;&#10;This reverts commit a23dd210" />
