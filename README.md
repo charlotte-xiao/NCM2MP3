@@ -12,7 +12,7 @@
 
 ## 原理说明
   NCM格式是网易云音乐特有的音乐格式,这种音乐格式用到AES,CR4的加密算法对普通的音乐格式(如MP3,FLAC)进行加密,若要了解该加密过程,最好的方法就是知道起格式图,以及加密的原理(可以参考笔记`密码学.md`).
-  
+
 ## 现在简述一下加密的过程
 |          信息          |             大小              | 备注                                                         |
 | :--------------------: | :---------------------------: | :----------------------------------------------------------- |
@@ -44,6 +44,19 @@
 - View 视图
   - view.java 用的Swing做的视图(Flatlaf这个jar包中有皮肤,所以看起来还不错.以后有机会学学javaFX..)
 -main.java 
+
+## 效果
+- 打开界面
+
+![](https://github.com/charlotte-xiao/NCM2MP3/blob/master/image/picture1.png)
+
+- 准备转换
+
+![](https://github.com/charlotte-xiao/NCM2MP3/blob/master/image/picture2.png)
+
+- 转换成功
+
+![](https://github.com/charlotte-xiao/NCM2MP3/blob/master/image/picture3.png)
 
 ## 更多
 - 密码学.md:关于密码学相关知识不懂的可以查看该文档
