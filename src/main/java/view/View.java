@@ -5,8 +5,8 @@
 package view;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import control.AsyncTaskExecutor;
 import control.ControlThread;
-import control.ThreadPool;
 import utils.Utils;
 
 import javax.swing.*;
@@ -51,7 +51,7 @@ public class View extends JFrame {
             for(int i=0;i<table.getModel().getRowCount();i++){
                 if(table.getModel().getValueAt(i, 3).equals("准备转换")){
                     String ncmFilePath = (String) table.getModel().getValueAt(i, 1);
-                    threadPool.addTask(new ControlThread(ncmFilePath,outFilePath,(DefaultTableModel) table.getModel(),i));
+                    AsyncTaskExecutor.execute(new ControlThread(ncmFilePath,outFilePath,(DefaultTableModel) table.getModel(),i));
                 }
             }
         }
@@ -187,8 +187,6 @@ public class View extends JFrame {
         table.getTableHeader().setReorderingAllowed(false);
         //window close ways
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //thread pool init
-        threadPool=new ThreadPool(5);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -203,6 +201,4 @@ public class View extends JFrame {
     //JFormChooser1,JFormChooser2
     private JFileChooser jFileChooser1;
     private JFileChooser jFileChooser2;
-    //ThreadPool
-    private ThreadPool threadPool;
 }

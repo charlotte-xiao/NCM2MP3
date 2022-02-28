@@ -2,7 +2,7 @@
 网易云ncm音乐格式转换为mp3音乐格式工具
 
 ## 环境准备
-- JDK8.0以上
+- JDK8.0
 - 依赖构建工具 Maven
 - 集成开发环境 IDEA(插件支持:Lombok)
 
@@ -16,7 +16,7 @@
 ## 现在简述一下加密的过程
 |          信息          |             大小              | 备注                                                         |
 | :--------------------: | :---------------------------: | :----------------------------------------------------------- |
-|      Magic Header      |           10 bytes            | 0x4354454e4644414d0170,验证即可                              |
+|      Magic Header      |           10 bytes            | 跳过                              |
 |       KEY Length       |            4 bytes            | 用AES128加密RC4密钥后的长度(小端字节排序,无符号整型)         |
 | KEY From AES128 Decode | KEY Length(其实就是128 bytes) | 用AES128加密的RC4密钥(注意:1.按字节对0x64异或2.AES解密(其中PKCS5Padding填充模式会去除末尾填充部分;)3.去除前面`neteasecloudmusic`17个字节; |
 |      Mata Length       |            4 bytes            | Mata的信息的长度(小端字节排序,无符号整型)                    |
@@ -30,7 +30,7 @@
 ## 项目构成说明
 - control:控制管理
   - ControlThread.java 对应每一个音乐转换的任务(消费者)
-  - ThreadPool.java 线程池(生产者消费者模型,默认的线程池大小为5)
+  - AsyncTaskExecutor.java 线程池,双空判断懒加载模式,核心线程10个，最大线程数20个，队列长度为100
 - core:音乐格式转换核心功能实现
   - Combine.java 将分析的各个数据整合到一起
   - Core.java 将NCM音乐解密拆分(==如果想快速看懂这个项目:建议从这个类开始看==)

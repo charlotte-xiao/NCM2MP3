@@ -27,17 +27,19 @@ public class Core {
             NCM ncm=new NCM();
             ncm.setNcmFile(ncmFilePath);
             FileInputStream inputStream=new FileInputStream(new File(ncm.getNcmFile()));
-            if(!magicHeader(inputStream)) return false;
+            magicHeader(inputStream);
             byte[] key=cr4Key(inputStream);
             MATA mata = JSON.parseObject(mataData(inputStream), MATA.class);
             ncm.setMata(mata);
             byte[] image=albumImage(inputStream);
             ncm.setImage(image);
             File ncmFile=new File(ncmFilePath);
-            outFilePath+="\\"+ncmFile.getName().substring(0,ncmFile.getName().length()-3)+ncm.getMata().format;
+            String splitFile = ncmFilePath.contains("/") ? "/" : "\\";
+            outFilePath+= splitFile+ncmFile.getName().substring(0,ncmFile.getName().length()-3)+ncm.getMata().format;
             ncm.setOutFile(outFilePath);
             FileOutputStream outputStream=new FileOutputStream(new File(ncm.getOutFile()));
             musicData(inputStream, outputStream,key);
+            System.out.format("转换成功文件：%s\n", outFilePath);
             return new Combine(ncm).combineFile();
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,19 +47,13 @@ public class Core {
         }
     }
 
-    /**判断是否是NCM格式
+    /**NCM格式头部读取
      * 功能:MagicHeader读取
      * @param inputStream ncm文件输入流
-     * @return 正确|错误
      */
-    public boolean magicHeader(FileInputStream inputStream)throws Exception{
-        byte[] magic_Header={67,84,69,78,70,68,65,77,1,112};
+    public void magicHeader(FileInputStream inputStream)throws Exception{
         byte[] bytes=new byte[10];
         inputStream.read(bytes,0,10);
-        for (int i=0;i<10;i++) {
-           if(magic_Header[i]!=bytes[i]) return false;
-        }
-       return true;
     }
 
     /**获取CR4密钥

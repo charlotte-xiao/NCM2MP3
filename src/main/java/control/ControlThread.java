@@ -7,7 +7,7 @@ import javax.swing.table.TableModel;
 /**
  * @author charlottexiao
  */
-public class ControlThread extends Thread{
+public class ControlThread implements Runnable{
 
     private String ncmFilePath;
     private String outFilePath;
