@@ -3,13 +3,25 @@ package mime;
 /**
  * @author charlottexiao
  */
-public class MATA {
-    //音乐名TITLE
+public class Mata {
+
+    /**
+     * 音乐名
+     */
     public String musicName;
-    //艺术家ARTIST
+
+    /**
+     * 艺术家
+     */
     public String[][] artist;
-    //专辑ALBUM
+
+    /**
+     * 专辑
+     */
     public String album;
-    //格式
+
+    /**
+     * 格式
+     */
     public String format;
 }

@@ -8,15 +8,26 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class NCM {
+public class Ncm {
 
-    //NCM的文件路径
+    /**
+     * NCM的文件路径
+     */
     private String ncmFile;
-    //转换后文件路径
+
+    /**
+     * 转换后文件路径
+     */
     private String outFile;
-    //头信息
-    private MATA mata;
-    //封面信息
+
+    /**
+     * 头信息
+     */
+    private Mata mata;
+
+    /**
+     * 封面信息
+     */
     private byte[] image;
 
 

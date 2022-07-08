@@ -18,53 +18,55 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @author charlottexiao
  */
 public class View extends JFrame {
     public View() {
-        FlatIntelliJLaf.install();
+        FlatIntelliJLaf.setup();
         initComponents();
     }
+
     private void button1MouseClicked(MouseEvent e) {
         // TODO add your code here
         int returnVal = jFileChooser1.showOpenDialog(panel);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] files = jFileChooser1.getSelectedFiles();
-            ArrayList<File> arrayList=new ArrayList<File>();
+            ArrayList<File> arrayList = new ArrayList<>();
             for (File file : files) {
-                Utils.listAllFiles(arrayList,file);
+                Utils.listAllFiles(arrayList, file);
             }
             for (File file : arrayList) {
-                ((DefaultTableModel)table.getModel()).addRow(new String[]{file.getName(),file.getAbsolutePath(),String.valueOf(file.length()),"准备转换"});
+                ((DefaultTableModel) table.getModel()).addRow(new String[]{file.getName(), file.getAbsolutePath(), String.valueOf(file.length()), "准备转换"});
             }
         }
     }
-    
+
     private void button2MouseClicked(MouseEvent e) {
         // TODO add your code here
         int returnVal = jFileChooser2.showOpenDialog(panel);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = jFileChooser2.getSelectedFile();
-            String outFilePath=file.getAbsolutePath();
-            for(int i=0;i<table.getModel().getRowCount();i++){
-                if(table.getModel().getValueAt(i, 3).equals("准备转换")){
+            String outFilePath = file.getAbsolutePath();
+            for (int i = 0; i < table.getModel().getRowCount(); i++) {
+                if (table.getModel().getValueAt(i, 3).equals("准备转换")) {
                     String ncmFilePath = (String) table.getModel().getValueAt(i, 1);
-                    AsyncTaskExecutor.execute(new ControlThread(ncmFilePath,outFilePath,(DefaultTableModel) table.getModel(),i));
+                    AsyncTaskExecutor.execute(new ControlThread(ncmFilePath, outFilePath, table.getModel(), i));
                 }
             }
         }
     }
-    
+
     private void button3MouseClicked(MouseEvent e) {
         // TODO add your code here
-       int rowCount = table.getModel().getRowCount();
-       for(int i=1;i<=rowCount;i++){
-           ((DefaultTableModel)table.getModel()).removeRow(rowCount-i);
-       }
+        int rowCount = table.getModel().getRowCount();
+        for (int i = 1; i <= rowCount; i++) {
+            ((DefaultTableModel) table.getModel()).removeRow(rowCount - i);
+        }
     }
-    
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -76,7 +78,7 @@ public class View extends JFrame {
         table = new JTable();
 
         //======== this ========
-        setIconImage(new ImageIcon(View.class.getResource("/image/ico.png")).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(View.class.getResource("/image/ico.png"))).getImage());
         setTitle("NCM2MP3");
         setMinimumSize(null);
         setVisible(true);
@@ -88,12 +90,15 @@ public class View extends JFrame {
 
         //======== panel ========
         {
-            panel.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing.
-            border .EmptyBorder ( 0, 0 ,0 , 0) ,  "author:charlottexiao" , javax. swing .border . TitledBorder. CENTER
-            ,javax . swing. border .TitledBorder . BOTTOM, new Font ( "Dia\u006cog", Font
-            . BOLD ,12 ) , Color .red ) ,panel. getBorder () ) ); panel. addPropertyChangeListener(
-            new java. beans .PropertyChangeListener ( ){public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r"
-            .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            panel.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+                    border.EmptyBorder(0, 0, 0, 0), "author:charlottexiao", javax.swing.border.TitledBorder.CENTER
+                    , javax.swing.border.TitledBorder.BOTTOM, new Font("Dia\u006cog", Font
+                    .BOLD, 12), Color.red), panel.getBorder()));
+            panel.addPropertyChangeListener(
+                    e -> {
+                        if ("bord\u0065r"
+                                .equals(e.getPropertyName())) throw new RuntimeException();
+                    });
             panel.setLayout(new GridLayout(1, 3, 2, 2));
 
             //---- button1 ----
@@ -136,15 +141,16 @@ public class View extends JFrame {
             table.setPreferredSize(null);
             table.setPreferredScrollableViewportSize(new Dimension(0, 0));
             table.setModel(new DefaultTableModel(
-                new Object[][] {
-                },
-                new String[] {
-                    "\u97f3\u4e50\u540d", "\u6587\u4ef6\u8def\u5f84", "\u6587\u4ef6\u5927\u5c0f", "\u72b6\u6001"
-                }
+                    new Object[][]{
+                    },
+                    new String[]{
+                            "\u97f3\u4e50\u540d", "\u6587\u4ef6\u8def\u5f84", "\u6587\u4ef6\u5927\u5c0f", "\u72b6\u6001"
+                    }
             ) {
-                Class<?>[] columnTypes = new Class<?>[] {
-                    String.class, String.class, String.class, String.class
+                Class<?>[] columnTypes = new Class<?>[]{
+                        String.class, String.class, String.class, String.class
                 };
+
                 @Override
                 public Class<?> getColumnClass(int columnIndex) {
                     return columnTypes[columnIndex];
@@ -177,9 +183,9 @@ public class View extends JFrame {
         jFileChooser1.setDialogTitle("请选择NCM音乐文件或文件夹");
         jFileChooser1.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         jFileChooser1.setMultiSelectionEnabled(true);
-        jFileChooser1.setFileFilter(new FileNameExtensionFilter("网易云NCM格式音乐","ncm"));
+        jFileChooser1.setFileFilter(new FileNameExtensionFilter("网易云NCM格式音乐", "ncm"));
         //JFormChooser2
-        jFileChooser2=new JFileChooser();
+        jFileChooser2 = new JFileChooser();
         jFileChooser2.setDialogTitle("请选择保存目录");
         jFileChooser2.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         jFileChooser2.setMultiSelectionEnabled(false);

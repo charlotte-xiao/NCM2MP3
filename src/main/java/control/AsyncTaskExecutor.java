@@ -39,14 +39,15 @@ public class AsyncTaskExecutor {
 
     /**
      * 创建异步线程执行器
+     *
      * @return 异步线程执行器
      */
-    private static ThreadPoolExecutor createExecutor(){
+    private static ThreadPoolExecutor createExecutor() {
         return new ThreadPoolExecutor(corePoolSize,
                 maxPoolSize,
                 keepAliveTime,
                 TimeUnit.SECONDS,
-                new ArrayBlockingQueue<Runnable>(queueCapacity),
+                new ArrayBlockingQueue<>(queueCapacity),
                 Executors.defaultThreadFactory(),
                 new ThreadPoolExecutor.CallerRunsPolicy());
     }
@@ -56,19 +57,19 @@ public class AsyncTaskExecutor {
      *
      * @param task 异步任务
      */
-    public static void execute(Runnable task){
-        try{
-            if(executor == null){
-                synchronized (AsyncTaskExecutor.class){
+    public static void execute(Runnable task) {
+        try {
+            if (executor == null) {
+                synchronized (AsyncTaskExecutor.class) {
                     ThreadPoolExecutor temp = executor;
-                    if(temp == null){
+                    if (temp == null) {
                         temp = createExecutor();
                         executor = temp;
                     }
                 }
             }
             executor.execute(task);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.format("异步任务启动失败: task %s ,异常： %s", JSON.toJSONString(task), JSON.toJSONString(e));
         }
     }
