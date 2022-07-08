@@ -25,25 +25,6 @@ public class Utils {
     }
 
     /**
-     * 获取音乐数据类型
-     * 功能:对音乐数据头部识别,获取数据类型
-     *
-     * @param bytes 音乐数据
-     * @return 数据类型
-     */
-    public static String getType(byte[] bytes) {
-        //ID3
-        if (bytes[0] == 0x49 && bytes[1] == 0x44 && bytes[2] == 0x33) {
-            return ".mp3";
-        }
-        //fLaC
-        if (bytes[0] == 0x66 && bytes[1] == 0x4C && bytes[2] == 0x61 && bytes[3] == 0x43) {
-            return ".flac";
-        }
-        return ".broken";
-    }
-
-    /**
      * 图片专辑MIME类型
      * 功能:获取图片的MIME类型
      *

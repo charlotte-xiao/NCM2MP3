@@ -8,7 +8,7 @@ public class CR4 {
      * s-box
      */
 
-    private int[] box = new int[256];
+    private final int[] box = new int[256];
 
     /**
      * CR4-KSA秘钥调度算法

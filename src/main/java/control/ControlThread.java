@@ -9,10 +9,10 @@ import javax.swing.table.TableModel;
  */
 public class ControlThread implements Runnable {
 
-    private String ncmFilePath;
-    private String outFilePath;
-    private TableModel model;
-    private int rowIndex;
+    private final String ncmFilePath;
+    private final String outFilePath;
+    private final TableModel model;
+    private final int rowIndex;
 
     /**
      * ControllerThread初始化
