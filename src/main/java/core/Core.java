@@ -10,6 +10,7 @@ import utils.Utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -112,7 +113,7 @@ public class Core {
         //4.AES解密(其中PKCS5Padding填充模式会去除末尾填充部分)
         temp = AES.decrypt(temp, AES.MATA_KEY, AES.TRANSFORMATION, AES.ALGORITHM);
         //5.去除前面`music:`6个字节后获得JSON
-        return new String(temp, 6, temp.length - 6);
+        return new String(temp, 6, temp.length - 6, StandardCharsets.UTF_8);
     }
 
     /**
