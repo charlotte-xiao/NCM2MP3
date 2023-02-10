@@ -7,7 +7,8 @@
 - 集成开发环境 IDEA(插件支持:Lombok)
 
 ## 运行说明
-- 使用NCM2MP3.jar运行(只需要准备jdk环境便可以):命令行中在该jar包的目录下执行`java -jar NCM2MP3.jar`
+- 使用NCM2MP3.jar运行图形界面(只需要准备jdk环境便可以):命令行中在该jar包的目录下执行`java -jar NCM2MP3.jar`
+- 使用NCM2MP3.jar运行命令行(只需要准备jdk环境便可以):命令行中在该jar包的目录下执行`java -jar NCM2MP3.jar [filename1] [filename2] ... [-o output_dir]`。 其中输出目录如果省略则默认为当前工作目录
 - 用源代码运行:在环境配置好后,执行入口为`main.java`
 
 ## 原理说明
