@@ -32,7 +32,7 @@
 - control:控制管理
   - ControlThread.java 对应每一个音乐转换的任务(消费者)
   - AsyncTaskExecutor.java 线程池,双空判断懒加载模式,核心线程10个，最大线程数20个，队列长度为100
-- core:音乐格式转换核心功能实现
+- converter:音乐格式转换核心功能实现
   - Combine.java 将分析的各个数据整合到一起
   - Core.java 将NCM音乐解密拆分(==如果想快速看懂这个项目:建议从这个类开始看==)
 - mime 封装的数据类型

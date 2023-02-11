@@ -1,12 +1,22 @@
-package core;
+package service;
 
 import com.alibaba.fastjson.JSON;
 import mime.Mata;
 import mime.Ncm;
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.flac.metadatablock.MetadataBlockDataPicture;
+import org.jaudiotagger.tag.FieldKey;
+import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.images.Artwork;
+import org.jaudiotagger.tag.images.ArtworkFactory;
 import utils.AES;
 import utils.CR4;
 import utils.Utils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,7 +26,7 @@ import java.util.Base64;
 /**
  * @author charlottexiao
  */
-public class Core {
+public class Converter {
     /**
      * NCM转换MP3
      * 功能:将NCM音乐转换为MP3
@@ -42,10 +52,12 @@ public class Core {
             ncm.setOutFile(outFilePath);
             FileOutputStream outputStream = new FileOutputStream(ncm.getOutFile());
             musicData(inputStream, outputStream, key);
+            combineFile(ncm);
             System.out.format("转换成功文件：%s\n", outFilePath);
-            return new Combine(ncm).combineFile();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.format("转换失败文件：%s\n", outFilePath);
             return false;
         }
     }
@@ -56,7 +68,7 @@ public class Core {
      *
      * @param inputStream ncm文件输入流
      */
-    public void magicHeader(FileInputStream inputStream) throws Exception {
+    private void magicHeader(FileInputStream inputStream) throws Exception {
         byte[] bytes = new byte[10];
         inputStream.read(bytes, 0, 10);
     }
@@ -68,7 +80,7 @@ public class Core {
      * @param inputStream ncm文件输入流
      * @return CR4密钥
      */
-    public byte[] cr4Key(FileInputStream inputStream) throws Exception {
+    private byte[] cr4Key(FileInputStream inputStream) throws Exception {
         byte[] bytes = new byte[4];
         inputStream.read(bytes, 0, 4);
         int len = Utils.getLength(bytes);
@@ -93,7 +105,7 @@ public class Core {
      * @param inputStream ncm文件输入流
      * @return JSON格式头部信息
      */
-    public String mataData(FileInputStream inputStream) throws Exception {
+    private String mataData(FileInputStream inputStream) throws Exception {
         byte[] bytes = new byte[4];
         inputStream.read(bytes, 0, 4);
         int len = Utils.getLength(bytes);
@@ -123,7 +135,7 @@ public class Core {
      * @param inputStream ncm文件输入流
      * @return 专辑图片数据
      */
-    public byte[] albumImage(FileInputStream inputStream) throws Exception {
+    private byte[] albumImage(FileInputStream inputStream) throws Exception {
         byte[] bytes = new byte[4];
         inputStream.read(bytes, 0, 4);
         int len = Utils.getLength(bytes);
@@ -140,7 +152,7 @@ public class Core {
      * @param outputStream 存音乐数据的文件输出流
      * @param cr4Key       CR4密钥
      */
-    public void musicData(FileInputStream inputStream, FileOutputStream outputStream, byte[] cr4Key) throws Exception {
+    private void musicData(FileInputStream inputStream, FileOutputStream outputStream, byte[] cr4Key) throws Exception {
         CR4 cr4 = new CR4();
         cr4.KSA(cr4Key);
         byte[] buffer = new byte[0x8000];
@@ -150,5 +162,24 @@ public class Core {
         }
         inputStream.close();
         outputStream.close();
+    }
+
+    /**
+     * 功能:将NCM中各个信息整合到一起,转换成对应音乐格式
+     *
+     */
+    private void combineFile(Ncm ncm) throws Exception{
+        AudioFile audioFile = AudioFileIO.read(new File(ncm.getOutFile()));
+        Tag tag = audioFile.getTag();
+        tag.setField(FieldKey.ALBUM, ncm.getMata().album);
+        tag.setField(FieldKey.TITLE, ncm.getMata().musicName);
+        tag.setField(FieldKey.ARTIST, ncm.getMata().artist[0]);
+        BufferedImage image = ImageIO.read(new ByteArrayInputStream(ncm.getImage()));
+        if (image != null) {
+            MetadataBlockDataPicture coverArt = new MetadataBlockDataPicture(ncm.getImage(), 0, Utils.albumImageMimeType(ncm.getImage()), "", image.getWidth(), image.getHeight(), image.getColorModel().hasAlpha() ? 32 : 24, 0);
+            Artwork artwork = ArtworkFactory.createArtworkFromMetadataBlockDataPicture(coverArt);
+            tag.setField(tag.createField(artwork));
+        }
+        AudioFileIO.write(audioFile);
     }
 }

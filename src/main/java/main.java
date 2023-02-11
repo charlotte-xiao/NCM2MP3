@@ -1,9 +1,8 @@
+import service.Converter;
 import view.View;
 
 import java.io.File;
 import java.util.Vector;
-
-import core.Core;
 
 /**
  * @author charlottexiao
@@ -60,14 +59,14 @@ public class main {
             }
 
             // now convert
-            Core core = new Core();
+            Converter converter = new Converter();
             System.out.println(String.format("Output dir is set to: %s", outputDir.getAbsolutePath()));
             for (int i = 0; i < filenames.size(); i++) {
                 String filename = filenames.elementAt(i);
                 File inputFile = new File(filename);
                 System.out.println(String.format("Converting %s", filename));
 
-                boolean success = core.ncm2Mp3(inputFile.getAbsolutePath(), outputDir.getAbsolutePath());
+                boolean success = converter.ncm2Mp3(inputFile.getAbsolutePath(), outputDir.getAbsolutePath());
                 if (success) {
                     System.out.println("Done");
                 } else {

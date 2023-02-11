@@ -6,7 +6,7 @@ package view;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import control.AsyncTaskExecutor;
-import control.ControlThread;
+import control.ConvertTask;
 import utils.Utils;
 
 import javax.swing.*;
@@ -30,7 +30,6 @@ public class View extends JFrame {
     }
 
     private void button1MouseClicked(MouseEvent e) {
-        // TODO add your code here
         int returnVal = jFileChooser1.showOpenDialog(panel);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] files = jFileChooser1.getSelectedFiles();
@@ -45,7 +44,6 @@ public class View extends JFrame {
     }
 
     private void button2MouseClicked(MouseEvent e) {
-        // TODO add your code here
         int returnVal = jFileChooser2.showOpenDialog(panel);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = jFileChooser2.getSelectedFile();
@@ -53,14 +51,13 @@ public class View extends JFrame {
             for (int i = 0; i < table.getModel().getRowCount(); i++) {
                 if (table.getModel().getValueAt(i, 3).equals("准备转换")) {
                     String ncmFilePath = (String) table.getModel().getValueAt(i, 1);
-                    AsyncTaskExecutor.execute(new ControlThread(ncmFilePath, outFilePath, table.getModel(), i));
+                    AsyncTaskExecutor.execute(new ConvertTask(ncmFilePath, outFilePath, table.getModel(), i));
                 }
             }
         }
     }
 
     private void button3MouseClicked(MouseEvent e) {
-        // TODO add your code here
         int rowCount = table.getModel().getRowCount();
         for (int i = 1; i <= rowCount; i++) {
             ((DefaultTableModel) table.getModel()).removeRow(rowCount - i);
