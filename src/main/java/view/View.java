@@ -5,8 +5,8 @@
 package view;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import control.AsyncTaskExecutor;
-import control.ConvertTask;
+import executor.AsyncTaskExecutor;
+import executor.ConvertTask;
 import utils.Utils;
 
 import javax.swing.*;

@@ -29,7 +29,7 @@
 |       Music Data       |               -               | RC4-KSA生成s盒,RC4-PRGA解密                                  |
 
 ## 项目构成说明
-- control:控制管理
+- executor:控制管理
   - ControlThread.java 对应每一个音乐转换的任务(消费者)
   - AsyncTaskExecutor.java 线程池,双空判断懒加载模式,核心线程10个，最大线程数20个，队列长度为100
 - converter:音乐格式转换核心功能实现
