@@ -7,9 +7,20 @@
 - 集成开发环境 IDEA(插件支持:Lombok)
 
 ## 运行说明
-- 使用NCM2MP3.jar运行图形界面(只需要准备jdk环境便可以):命令行中在该jar包的目录下执行`java -jar NCM2MP3.jar`
-- 使用NCM2MP3.jar运行命令行(只需要准备jdk环境便可以):命令行中在该jar包的目录下执行`java -jar NCM2MP3.jar [filename1] [filename2] ... [-o output_dir]`。 其中输出目录如果省略则默认为当前工作目录
-- 用源代码运行:在环境配置好后,执行入口为`main.java`
+
+```text
+
+1. 使用NCM2MP3.jar运行图形界面(只需要准备jdk环境便可以):命令行中在该jar包的目录下执行`java -jar NCM2MP3.jar`
+2. 用源代码运行:在环境配置好后,执行入口为`main.java`
+3. 命令行相关操作`java -jar NCM2MP3.jar [command]`
+Usage: java -jar NCM2MP3.jar [command]
+If don't add command, there will open NCM2MP3 GUI directly
+[Command List]
+-v,-view                      : open NCM View GUI(default command)
+-c,--convert [path] ...       : convert NCM File in path to ./output directory
+-h,-help                      : Help about any command
+```
+
 
 ## 原理说明
   NCM格式是网易云音乐特有的音乐格式,这种音乐格式用到AES,RC4的加密算法对普通的音乐格式(如MP3,FLAC)进行加密,若要了解该加密过程,最好的方法就是知道起格式图,以及加密的原理(可以参考笔记`密码学.md`).
@@ -30,11 +41,12 @@
 
 ## 项目构成说明
 - executor:控制管理
-  - ControlThread.java 对应每一个音乐转换的任务(消费者)
+  - ConvertTask.java 对应每一个音乐转换的任务(消费者)
   - AsyncTaskExecutor.java 线程池,双空判断懒加载模式,核心线程10个，最大线程数20个，队列长度为100
-- converter:音乐格式转换核心功能实现
-  - Combine.java 将分析的各个数据整合到一起
-  - Core.java 将NCM音乐解密拆分(==如果想快速看懂这个项目:建议从这个类开始看==)
+- service:音乐格式转换核心功能实现
+  - Converter.java 将NCM音乐解密拆分(==如果想快速看懂这个项目:建议从这个类开始看==), 将分析的各个数据整合到一起
+  - Interpreter: 命令行参数解析器(策略模式分配命令处理)
+    - ConvertCommand,HelpCommand,ViewCommand: 现在支持的3种命令
 - mime 封装的数据类型
   - MATA.java 音乐头部信息
   - NCM.java 音乐输入输出信息等基本信息
