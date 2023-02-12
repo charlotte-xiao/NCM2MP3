@@ -73,3 +73,6 @@ If don't add command, there will open NCM2MP3 GUI directly
 
 ## 更多
 - 密码学.md:关于密码学相关知识不懂的可以查看该文档
+
+## 声明
+此工具仅供学习用途，请勿使用其盈利！
