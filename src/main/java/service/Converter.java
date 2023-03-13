@@ -47,7 +47,7 @@ public class Converter {
             byte[] image = albumImage(inputStream);
             ncm.setImage(image);
             File ncmFile = new File(ncmFilePath);
-            outFilePath += File.pathSeparatorChar + ncmFile.getName().substring(0, ncmFile.getName().length() - 3) + ncm.getMata().format;
+            outFilePath += File.separator + ncmFile.getName().substring(0, ncmFile.getName().length() - 3) + ncm.getMata().format;
             ncm.setOutFile(outFilePath);
             FileOutputStream outputStream = new FileOutputStream(ncm.getOutFile());
             musicData(inputStream, outputStream, key);

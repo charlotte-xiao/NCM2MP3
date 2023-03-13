@@ -17,7 +17,7 @@ public class ConvertCommand extends BaseCommand {
 
     @Override
     public void handle(List<String> params) {
-        File outputPath = new File("." + File.pathSeparatorChar + "output");
+        File outputPath = new File("." + File.separator + "output");
         System.out.printf("Output dir is set to: %s%n", outputPath.getAbsolutePath());
 
         ArrayList<File> files = new ArrayList<>();
