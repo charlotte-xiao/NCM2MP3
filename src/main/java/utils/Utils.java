@@ -53,15 +53,15 @@ public class Utils {
     public static void listAllFiles(ArrayList<File> arrayList, File file) {
         if (!file.isDirectory()) {
             String name = file.getName().trim();
-            if ("ncm".equalsIgnoreCase(name.substring(name.length() - 3))) {
+            if (name.length() > 3 && "ncm".equalsIgnoreCase(name.substring(name.length() - 3))) {
                 arrayList.add(file);
             }
-        } else {
-            File[] files = file.listFiles();
-            assert files != null;
-            for (File f : files) {
-                listAllFiles(arrayList, f);
-            }
+            return;
+        }
+        File[] files = file.listFiles();
+        assert files != null;
+        for (File f : files) {
+            listAllFiles(arrayList, f);
         }
     }
 }
