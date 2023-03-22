@@ -1,5 +1,8 @@
-  #InteliJ IDEA
+# InteliJ IDEA
 classes/
 target/
 .idea/
 dependency-reduced-pom.xml
+
+# IDEA构建工件METAINF目录
+src/main/resources/META-INF
