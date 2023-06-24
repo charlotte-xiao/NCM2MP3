@@ -6,12 +6,11 @@ import service.command.common.BaseCommand;
 import utils.Utils;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 /**
  * @author charlottexiao
@@ -40,6 +39,11 @@ public class ConvertCommand extends BaseCommand {
 
         //中途有修改过outputPath的对象引用，要copy一份final才能传入lambda
         File finalOutputPath = outputPath;
-        files.forEach(inputFile -> AsyncTaskExecutor.execute(() -> new Converter().ncm2Mp3(inputFile.getAbsolutePath(), finalOutputPath.getAbsolutePath())));
+        Converter converter = new Converter();
+        List<Future<Boolean>> futures = files.stream()
+                .map(inputFile -> AsyncTaskExecutor.submit(() -> converter.ncm2Mp3(inputFile.getAbsolutePath(), finalOutputPath.getAbsolutePath())))
+                .collect(Collectors.toList());
+        Utils.waitForAllTask(futures, result -> result);
+        System.exit(0);
     }
 }

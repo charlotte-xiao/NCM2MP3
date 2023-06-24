@@ -3,11 +3,12 @@ package executor;
 import service.Converter;
 
 import javax.swing.table.TableModel;
+import java.util.concurrent.Callable;
 
 /**
  * @author charlottexiao
  */
-public class ConvertTask implements Runnable {
+public class ConvertTask implements Callable<Boolean> {
 
     private final String ncmFilePath;
     private final String outFilePath;
@@ -31,11 +32,14 @@ public class ConvertTask implements Runnable {
     /**
      * 线程执行方法:NCM文件转换,并修改器转换状态
      */
-    public void run() {
+    public Boolean call() {
         if (new Converter().ncm2Mp3(ncmFilePath, outFilePath)) {
             model.setValueAt("转换完毕", rowIndex, 3);
+            return true;
         } else {
             model.setValueAt("转换失败", rowIndex, 3);
+            return false;
         }
     }
+
 }

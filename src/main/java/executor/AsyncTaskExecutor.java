@@ -2,10 +2,7 @@ package executor;
 
 import com.alibaba.fastjson.JSON;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author charlottexiao
@@ -56,8 +53,9 @@ public class AsyncTaskExecutor {
      * 执行异步任务
      *
      * @param task 异步任务
+     * @return
      */
-    public static void execute(Runnable task) {
+    public static <T> Future<T> submit(Callable<T> task) {
         try {
             if (executor == null) {
                 synchronized (AsyncTaskExecutor.class) {
@@ -68,9 +66,11 @@ public class AsyncTaskExecutor {
                     }
                 }
             }
-            executor.execute(task);
+            Future<T> submit = executor.submit(task);
+            return submit;
         } catch (Exception e) {
             System.out.format("异步任务启动失败: task %s ,异常： %s", JSON.toJSONString(task), JSON.toJSONString(e));
+            return CompletableFuture.supplyAsync(() -> {throw e;});
         }
     }
 }
