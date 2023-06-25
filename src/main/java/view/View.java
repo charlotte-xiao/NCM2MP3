@@ -18,7 +18,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Future;
 
 /**
  * @author charlottexiao
@@ -45,16 +47,21 @@ public class View extends JFrame {
 
     private void button2MouseClicked(MouseEvent e) {
         int returnVal = jFileChooser2.showOpenDialog(panel);
+        List<Future<Boolean>> tasks = new ArrayList();
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = jFileChooser2.getSelectedFile();
             String outFilePath = file.getAbsolutePath();
             for (int i = 0; i < table.getModel().getRowCount(); i++) {
                 if (table.getModel().getValueAt(i, 3).equals("准备转换")) {
                     String ncmFilePath = (String) table.getModel().getValueAt(i, 1);
-                    AsyncTaskExecutor.execute(new ConvertTask(ncmFilePath, outFilePath, table.getModel(), i));
+                    tasks.add(AsyncTaskExecutor.submit(new ConvertTask(ncmFilePath, outFilePath, table.getModel(), i)));
                 }
             }
         }
+        AsyncTaskExecutor.submit(() -> {
+            Utils.waitForAllTask(tasks, result -> result);
+            return null;
+        });
     }
 
     private void button3MouseClicked(MouseEvent e) {

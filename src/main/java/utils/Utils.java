@@ -2,6 +2,10 @@ package utils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 /**
  * @author charlottexiao
@@ -64,4 +68,28 @@ public class Utils {
             listAllFiles(arrayList, f);
         }
     }
+
+    public static <V>  void waitForAllTask(Collection<Future<V>> futures, Predicate<V> predicateSuccess) {
+        long startTime = System.nanoTime();
+        int finishCnt = 0;
+        int successCnt = 0;
+        int failCnt = 0;
+        for (Future<V> future : futures) {
+            try {
+                if (predicateSuccess.test(future.get())) {
+                    successCnt++;
+                } else {
+                    failCnt++;
+                }
+                finishCnt++;
+                System.out.format("已经完成的任务数量: %s \n", finishCnt);
+            } catch (Exception e) {
+                failCnt++;
+                System.out.format("异步任务执行失败,异常： %s\n", e);
+            }
+        }
+        System.out.format("所有任务执行完成,任务总数： %s, 成功数量: %s, 失败数量: %s!总共耗时: %sms", finishCnt, successCnt, failCnt,TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime));
+
+    }
+
 }
