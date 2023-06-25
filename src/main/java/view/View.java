@@ -58,7 +58,10 @@ public class View extends JFrame {
                 }
             }
         }
-        Utils.waitForAllTask(tasks, result -> result);
+        AsyncTaskExecutor.submit(() -> {
+            Utils.waitForAllTask(tasks, result -> result);
+            return null;
+        });
     }
 
     private void button3MouseClicked(MouseEvent e) {
